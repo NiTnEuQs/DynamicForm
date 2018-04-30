@@ -1,9 +1,13 @@
 <?php namespace Nitneuqs\DynamicForm\Fields;
 
+require_once 'Field.php';
+require_once 'WeatherType.php';
+
 use Nitneuqs\DynamicForm\Field;
 use Nitneuqs\DynamicForm\WeatherType;
 
 class Weather extends Field {
+    public $input_classes = 'form-check-input';
     public $options = [
         WeatherType::SUNNY,
         WeatherType::CLOUDY,
@@ -12,22 +16,33 @@ class Weather extends Field {
         WeatherType::SNOWY,
     ];
 
-    public function __construct($title, $description, $is_needed) {
-        parent::__construct($title, $description, $is_needed);
-
-        $this->toHTMLField();
+    public function __construct($title, $description = '') {
+        parent::__construct($title, $description);
     }
 
     public function toHTMLField() {
-        $this->html .= '<label></label>';
-        $this->html .= '<div>\n';
+        $html = parent::toHTMLField();
+
+        $html .= sprintf('<div class="%s">', $this->classes);
         foreach ($this->options as $index => $option) {
-            $id = str_replace(' ', '_', mb_strtolower(iconv('utf-8','ASCII//IGNORE//TRANSLIT', $option)));
+            $id = str_replace(' ', '_', mb_strtolower(iconv('utf-8', 'ASCII//IGNORE//TRANSLIT', $option)));
 
-            $this->html .= sprintf('<label for="field_weather_%s">%s</label><input id="field_weather_%s" name="field_weather" type="radio" value="%b"/>\n', $id, $option, $id, $index);
+            $html .= sprintf('<div class="form-check">');
+            $html .= sprintf('<input id="field_weather_%s" class="%s" name="field_weather" type="radio" value="%b" %s/><label class="form-check-label" for="field_weather_%s">%s</label><br/>', $id, $this->input_classes, $index, $this->is_required, $id, $option);
+            $html .= '</div>';
         }
-        $this->html .= '</div>';
+        $html .= '</div>';
 
-        return $this->html;
+        return $html;
+    }
+
+    public function setInputClasses($input_classes) {
+        $this->input_classes = $input_classes;
+        return $this;
+    }
+
+    public function setOptions($options) {
+        $this->options = $options;
+        return $this;
     }
 }

@@ -1,5 +1,7 @@
 <?php namespace Nitneuqs\DynamicForm;
 
+use ReflectionClass;
+
 abstract class BasicEnum {
     private static $constCacheArray = NULL;
 
