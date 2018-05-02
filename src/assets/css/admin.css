@@ -1,0 +1,92 @@
+.center {
+    margin: auto;
+    padding: 10px;
+}
+
+.separated>div:not(:last-child) {
+    border-right: 1px solid #e0e0e0;
+}
+
+/*.separated>div:not(:first-child) {*/
+    /*border-left: 1px solid #e0e0e0;*/
+/*}*/
+
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto;
+    /*background-color: #2196F3;*/
+    padding: 10px;
+}
+
+.grid-item {
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    text-align: center;
+}
+
+/* Dynamics */
+
+.dynamic-component {
+    width: 200px;
+    height: 40px;
+    margin: 5px;
+    padding: 5px;
+    background-color: #2a6496;
+    cursor: pointer;
+}
+
+.dynamic-component>i {
+    float: right;
+}
+
+.dynamic-component>span, .dynamic-component>i {
+    color: white;
+    font-size: 15px;
+    vertical-align: sub;
+}
+
+.dynamic-container {
+    height: auto;
+}
+
+.dynamic-form {
+    padding: 10px;
+    min-height: 203px;
+    height: 100%;
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid #e0e0e0;
+    overflow: auto;
+    resize: vertical;
+}
+
+.dynamic-form-container {
+    border-radius: 5px;
+    background-color: #E0E0E0;
+    margin: 5px;
+    padding: 10px 10px 10px 50px !important;
+}
+
+.dynamic-form-component {
+    padding: 5px;
+}
+
+.dynamic-field {
+    cursor: default !important;
+}
+
+.dynamic-deleteButton {
+    position: absolute !important;
+    top: 0;
+    left: 0;
+}
+
+.dynamic-isRequiredButton {
+    position: absolute !important;
+    top: 0;
+    left: 40px;
+}
+
+.width-fill {
+    width: -webkit-fill-available;
+}

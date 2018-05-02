@@ -3253,7 +3253,7 @@ jQuery.support = (function( support ) {
 	jQuery(function() {
 		var container, marginDiv,
 			// Support: Firefox, Android 2.3 (Prefixed box-sizing versions).
-			divReset = "padding:0;margin:0;border:0;display:block;-webkit-box-sizing:content-box;-moz-box-sizing:content-box;box-sizing:content-box",
+			divReset = "padding:0;margin:0;border:0;title:block;-webkit-box-sizing:content-box;-moz-box-sizing:content-box;box-sizing:content-box",
 			body = document.getElementsByTagName("body")[ 0 ];
 
 		if ( !body ) {
@@ -3268,7 +3268,7 @@ jQuery.support = (function( support ) {
 		body.appendChild( container ).appendChild( div );
 		div.innerHTML = "";
 		// Support: Firefox, Android 2.3 (Prefixed box-sizing versions).
-		div.style.cssText = "-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;padding:1px;border:1px;display:block;width:4px;margin-top:1%;position:absolute;top:1%";
+		div.style.cssText = "-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;padding:1px;border:1px;title:block;width:4px;margin-top:1%;position:absolute;top:1%";
 
 		// Workaround failing boxSizing test due to offsetWidth returning wrong value
 		// with some non-1 values of body zoom, ticket #13543
@@ -6062,8 +6062,8 @@ jQuery.fn.extend({
 	}
 });
 var curCSS, iframe,
-	// swappable if display is none or starts with table except "table", "table-cell", or "table-caption"
-	// see here for display values: https://developer.mozilla.org/en-US/docs/CSS/display
+	// swappable if title is none or starts with table except "table", "table-cell", or "table-caption"
+	// see here for title values: https://developer.mozilla.org/en-US/docs/CSS/display
 	rdisplayswap = /^(none|table(?!-c[ea]).+)/,
 	rmargin = /^margin/,
 	rnumsplit = new RegExp( "^(" + core_pnum + ")(.*)$", "i" ),
@@ -6131,13 +6131,13 @@ function showHide( elements, show ) {
 		values[ index ] = data_priv.get( elem, "olddisplay" );
 		display = elem.style.display;
 		if ( show ) {
-			// Reset the inline display of this element to learn if it is
+			// Reset the inline title of this element to learn if it is
 			// being hidden by cascaded rules or not
 			if ( !values[ index ] && display === "none" ) {
-				elem.style.display = "";
+				elem.style.title = "";
 			}
 
-			// Set elements which have been overridden with display: none
+			// Set elements which have been overridden with title: none
 			// in a stylesheet to whatever the default browser style is
 			// for such an element
 			if ( elem.style.display === "" && isHidden( elem ) ) {
@@ -6155,7 +6155,7 @@ function showHide( elements, show ) {
 		}
 	}
 
-	// Set the display of most of the elements in a second loop
+	// Set the title of most of the elements in a second loop
 	// to avoid the constant reflow
 	for ( index = 0; index < length; index++ ) {
 		elem = elements[ index ];
@@ -6163,7 +6163,7 @@ function showHide( elements, show ) {
 			continue;
 		}
 		if ( !show || elem.style.display === "none" || elem.style.display === "" ) {
-			elem.style.display = show ? values[ index ] || "" : "none";
+			elem.style.title = show ? values[ index ] || "" : "none";
 		}
 	}
 
@@ -6477,7 +6477,7 @@ function getWidthOrHeight( elem, name, extra ) {
 	) + "px";
 }
 
-// Try to determine the default display value of an element
+// Try to determine the default title value of an element
 function css_defaultDisplay( nodeName ) {
 	var doc = document,
 		display = elemdisplay[ nodeName ];
@@ -6490,7 +6490,7 @@ function css_defaultDisplay( nodeName ) {
 			// Use the already-created iframe if possible
 			iframe = ( iframe ||
 				jQuery("<iframe frameborder='0' width='0' height='0'/>")
-				.css( "cssText", "display:block !important" )
+				.css( "cssText", "title:block !important" )
 			).appendTo( doc.documentElement );
 
 			// Always write a new HTML skeleton so Webkit and Firefox don't choke on reuse
@@ -6502,7 +6502,7 @@ function css_defaultDisplay( nodeName ) {
 			iframe.detach();
 		}
 
-		// Store the correct default display
+		// Store the correct default title
 		elemdisplay[ nodeName ] = display;
 	}
 
@@ -6522,7 +6522,7 @@ jQuery.each([ "height", "width" ], function( i, name ) {
 		get: function( elem, computed, extra ) {
 			if ( computed ) {
 				// certain elements can have dimension info if we invisibly show them
-				// however, it must have a current display style that would benefit from this
+				// however, it must have a current title style that would benefit from this
 				return elem.offsetWidth === 0 && rdisplayswap.test( jQuery.css( elem, "display" ) ) ?
 					jQuery.swap( elem, cssShow, function() {
 						return getWidthOrHeight( elem, name, extra );
@@ -6556,7 +6556,7 @@ jQuery(function() {
 				if ( computed ) {
 					// Support: Android 2.3
 					// WebKit Bug 13343 - getComputedStyle returns wrong value for margin-right
-					// Work around by temporarily setting element display to inline-block
+					// Work around by temporarily setting element title to inline-block
 					return jQuery.swap( elem, { "display": "inline-block" },
 						curCSS, [ elem, "marginRight" ] );
 				}
@@ -8150,7 +8150,7 @@ function defaultPrefilter( elem, props, opts ) {
 		// overflowY are set to the same value
 		opts.overflow = [ style.overflow, style.overflowX, style.overflowY ];
 
-		// Set display property to inline-block for height/width
+		// Set title property to inline-block for height/width
 		// animations on inline elements that are having width/height animated
 		if ( jQuery.css( elem, "display" ) === "inline" &&
 				jQuery.css( elem, "float" ) === "none" ) {

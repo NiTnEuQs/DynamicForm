@@ -43,12 +43,9 @@ $form        = new Form($form_fields);
 <html>
 <head>
     <title>Formulaire</title>
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
-
-    <link href="assets/css/vendor.css" rel="stylesheet">
-    <link href="assets/css/formbuilder.css" rel="stylesheet">
-<!--    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" rel="stylesheet"-->
-<!--          integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">-->
+    <link href="src/assets/css/admin.css" rel="stylesheet">
+    <link href="src/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="src/assets/css/vendor.css" rel="stylesheet">
 
     <style>
         * {
@@ -60,7 +57,7 @@ $form        = new Form($form_fields);
             font-family: sans-serif;
         }
 
-        .formbuilder {
+        #formbuilder {
             background-color: #fff;
             border-radius: 5px;
             min-height: 600px;
@@ -75,32 +72,23 @@ $form        = new Form($form_fields);
             margin-bottom: 5px;
             font-size: 40px;
         }
-
-        .center {
-            margin: auto;
-            width: 50%;
-            padding: 10px;
-        }
     </style>
 </head>
 <body>
-    <script src="assets/js/vendor.js"></script>
-    <script src="assets/js/formbuilder.js"></script>
-<div>
-    <div class="center formbuilder">
-        <?php echo $form->enableNewLines()->enableFieldsNum()->toHTMLForm(); ?>
-<!--        <div id='formbuilder' class="formbuilder"></div>-->
-    </div>
 
-    <script>
-        let formbuilder = new Formbuilder({
-            selector: '#formbuilder'
-        });
+<script src="src/assets/js/vendor.js"></script>
+<script src="src/assets/js/draggableformbuilder.js"></script>
+<script src="src/assets/js/fields.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
 
-        formbuilder.on('save', function(payload){
-            console.log(payload);
-        })
-    </script>
+<div id="formbuilder" class="center" style="width: 80%"></div>
+<?php //echo $form->enableNewLines()->enableFieldsNum()->toHTMLForm(); ?>
+
+<script>
+    new DraggableFormBuilder({
+        selector: '#formbuilder',
+    });
+</script>
 
 </body>
 </html>
